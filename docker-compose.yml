@@ -1,0 +1,80 @@
+version : "3"
+services:
+  altron-web:
+    build:
+      context: .
+      dockerfile: dockerfiles/web.Dockerfile
+    container_name: altron-web
+    volumes:
+      - .:/var/www/html
+    ports:
+      - "1001:80"
+    restart: "no"
+    depends_on:
+      - altron-pgsql
+    networks:
+      altron-network:
+        ipv4_address: 100.10.1.1
+
+  altron-pgsql:
+    image: postgres:15
+    container_name: altron-pgsql
+    volumes:
+      - altron-pgsql-disk:/var/lib/postgres
+    restart: "no"
+    environment:
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: testing
+    ports:
+      - "1002:5432"
+    networks:
+      altron-network:
+        ipv4_address: 100.10.1.2
+
+  altron-vite:
+    build:
+      context: .
+      dockerfile: dockerfiles/vite.Dockerfile
+    container_name: altron-vite
+    volumes:
+      - .:/var/www/html
+    ports:
+      - "1003:5173"
+    restart: "no"
+    depends_on:
+      - altron-web
+    networks:
+      altron-network:
+        ipv4_address: 100.10.1.3
+
+  altron-mailpit:
+    image: axllent/mailpit:latest
+    container_name: altron-mailpit
+    restart: "no"
+    ports:
+      - "1004:8025"
+    networks:
+      altron-network:
+        ipv4_address: 100.10.1.4
+
+  altron-q:
+    build:
+      context: .
+      dockerfile: dockerfiles/q.Dockerfile
+    container_name: altron-q
+    volumes:
+      - .:/var/www/html
+    restart: unless-stopped
+    depends_on:
+      - altron-pgsql
+
+# On-disk storage of DB data, when containers are stopped
+volumes:
+  altron-pgsql-disk: {}
+
+networks:
+  altron-network:
+    ipam:
+      driver: default
+      config:
+        - subnet: 100.10.0.0/16
