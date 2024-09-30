@@ -65,6 +65,9 @@
             "@php artisan ide-helper:generate -n",
             "@php artisan ide-helper:meta -n",
             "@php artisan ide-helper:models -n"
+        ],
+        "pint": [
+            "vendor/bin/pint"
         ]
     },
     "extra": {
