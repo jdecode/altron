@@ -66,7 +66,7 @@ services:
       - .:/var/www/html
     restart: unless-stopped
     depends_on:
-      - altron-pgsql
+      - altron-web
 
 # On-disk storage of DB data, when containers are stopped
 volumes:
