@@ -1,11 +1,11 @@
 {
-    "name": "laravel/laravel",
-    "type": "project",
-    "description": "The skeleton application for the Laravel framework.",
-    "keywords": ["laravel", "framework"],
+    "name": "jdecode/altron",
+    "type": "boilerplate",
+    "description": "A Laravel ecosystem boilerplate focused on Livewire/Flux stack",
+    "keywords": ["laravel", "livewire", "jdecode", "altron", "flux"],
     "license": "MIT",
     "require": {
-        "php": "^8.2",
+        "php": "^8.3",
         "laravel/breeze": "^2.2",
         "laravel/framework": "^11.9",
         "laravel/pennant": "^1.11",
@@ -68,6 +68,9 @@
         ],
         "pint": [
             "vendor/bin/pint"
+        ],
+        "pest": [
+            "vendor/bin/pest"
         ]
     },
     "extra": {
