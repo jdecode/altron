@@ -148,7 +148,10 @@ RUN docker-php-ext-enable xdebug
 
 # If this cofiguration is not the one you want, you can override this in Dockerfile of your project
 # If overriding does not work, then use this file as source to generate a new docker image without following lines
-COPY ini/xdebug.ini /usr/local/etc/php/conf.d/99-docker-php-ext-xdebug.ini
+
+COPY ini/xdebug.ini ./xdebug.ini
+RUN cat ./xdebug.ini >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+RUN mv /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini /usr/local/etc/php/conf.d/30-docker-php-ext-xdebug.ini
 
 ## Update the user and group to match the host user (Never works!!)
 RUN usermod -u 1001 www-data && groupmod -g 1001 www-data
