@@ -1,13 +1,12 @@
 #!/bin/bash
 
 composer install
+npm install
 
 composer run dev
+npm run build
 
 git config --global --add safe.directory /var/www/html
 git config core.filemode false
-
-npm install
-npm run build
 
 apache2-foreground
