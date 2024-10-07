@@ -16,6 +16,9 @@
         },
         "operator_linebreak": {
             "position": "beginning"
+        },
+        "curly_braces_position": {
+            "anonymous_classes_opening_brace": "same_line"
         }
     }
 }

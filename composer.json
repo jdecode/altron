@@ -67,7 +67,7 @@
             "@php artisan ide-helper:models -n"
         ],
         "pint": [
-            "vendor/bin/pint"
+            "vendor/bin/pint app database routes resources tests config"
         ],
         "pest": [
             "vendor/bin/pest"
