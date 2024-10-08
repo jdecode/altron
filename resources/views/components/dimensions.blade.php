@@ -1,6 +1,6 @@
 @if(app()->environment('local'))
     <div
-        class="fixed z-50 left-0 bottom-0
+        class="fixed z-50 right-0 bottom-0
             bg-black/5 text-black
             dark:bg-white/5 dark:text-white
             p-4 px-8
