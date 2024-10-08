@@ -1,21 +1,23 @@
-<div class="flex flex-col justify-center sm:px-6 lg:px-8">
-    <h2 class="text-center text-2xl font-bold leading-9 tracking-tight  ">Register your account</h2>
+<div class="flex min-h-full flex-col justify-center py-12 sm:px-6 lg:px-8">
+    <h2 class="mt-6 text-center text-2xl font-bold leading-9 tracking-tight  ">Login</h2>
 
-    <div class="sm:mx-auto sm:w-full sm:max-w-[480px]">
+    <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-[480px]">
         <div class="px-6 py-6 shadow sm:rounded-lg sm:px-12">
             <form class="space-y-6" action="#" method="POST">
-                <flux:input wire:model="name" label="Name" name="name" required />
                 <flux:input wire:model="email" label="Email address" type="email" name="email" required />
                 <flux:input wire:model="password" label="Password" type="password" name="password" required viewable />
-                <flux:input wire:model="passwordConfirmation" label="Confirm Password" type="password" name="passwordConfirmation" required />
-                <div class="flex items-center justify-between">
+                <div class="flex items-center justify-between hidden">
+                    <div class="flex items-center">
+                        <flux:checkbox wire:model="remember" label="Remember me" />
+                    </div>
+
                     <div class="text-sm leading-6">
-                        <a href="#" class="font-semibold text-indigo-600 hover:text-indigo-500">Already registered?</a>
+                        <a href="#" class="font-semibold text-indigo-600 hover:text-indigo-500">Forgot password?</a>
                     </div>
                 </div>
 
                 <div>
-                    <flux:button wire:click="register" variant="primary" class="w-full">Register</flux:button>
+                    <flux:button wire:click="login" variant="primary" class="w-full">Login</flux:button>
                 </div>
             </form>
 
