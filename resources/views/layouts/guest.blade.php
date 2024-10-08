@@ -22,26 +22,64 @@
             {{-- bg-gray-50 dark:bg-gray-900 --}}
             bg-gray-50 text-black/50
             dark:bg-black dark:text-white/50
-            h-full">
-        <flux:header container class="">
-            <flux:sidebar.toggle class="lg:hidden" icon="bars-2" inset="left" />
+            {{-- h-full --}}
+            ">
+        <flux:header container class="!block bg-white lg:bg-zinc-50 dark:bg-zinc-900 border-b border-zinc-200 dark:border-zinc-700">
             <flux:brand
                 href="{{ route('homepage') }}"
                 wire:navigate
                 logo="{{ asset('assets/altron.png') }}"
                 name="!"
-                class="max-lg:hidden text-2xl text-orange-600 font-bold">
+                class=" text-2xl text-orange-600 font-bold">
             </flux:brand>
 
             <flux:spacer />
-            <livewire:welcome.navigation />
+
+            <flux:navbar.item>
+
+                <div
+                    x-data="{
+                        toggleDarkMode() {
+                            document.documentElement.classList.toggle('dark');
+                            localStorage.dark = !JSON.parse(localStorage.dark);
+                        },
+                        initMode(defaultMode = 'dark') {
+                            if (localStorage.getItem('dark')) {
+                                if(localStorage.dark === 'true') {
+                                    document.documentElement.classList.add('dark');
+                                    localStorage.dark = true;
+                                    return;
+                                }
+                                document.documentElement.classList.remove('dark');
+                                localStorage.dark = false;
+                                return;
+                            }
+                            localStorage.dark = defaultMode === 'dark';
+                            if(defaultMode !== 'dark') {
+                                document.documentElement.classList.remove('dark');
+                            }
+                        },
+                        initSetup(defaultMode = 'dark') {
+                            this.initMode(defaultMode);
+                        }
+                    }"
+                    x-init="initSetup()"
+                    x-on:toggle-dark-mode="toggleDarkMode()"
+                    >
+                    <flux:icon.moon x-on:click="$dispatch('toggle-dark-mode')" variant="solid"/>
+                </div>
+
+            </flux:navbar.item>
+            <flux:navbar.item href="{{ route('login') }}" wire:navigate>Login</flux:navbar.item>
+            <flux:navbar.item href="{{ route('register') }}" wire:navigate>Register</flux:navbar.item>
         </flux:header>
-        <flux:main>
-            <main class="">
+
+        <flux:main container>
+            <flux:card class="p-3 mb-3">
                 {{ $slot }}
-            </main>
+            </flux:card>
+
         </flux:main>
-        <flux:spacer />
         <flux:footer class="text-center text-sm text-black dark:text-white/70">
             Altron {{ date('Y') }}
         </flux:footer>
