@@ -28,9 +28,10 @@
             <flux:brand
                 href="{{ route('homepage') }}"
                 wire:navigate
-                name="A!"
                 logo="{{ asset('assets/altron.png') }}"
-                class="max-lg:hidden" />
+                name="!"
+                class="max-lg:hidden text-2xl text-orange-600 font-bold">
+            </flux:brand>
 
             <flux:spacer />
             <livewire:welcome.navigation />
